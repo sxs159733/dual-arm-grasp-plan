@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>双臂抓取 · 24 周学习计划</title>
+<meta name="description" content="从单臂视觉抓取闭环到双臂协同：24 周、168 天的每日任务、验收门与学习资料。">
+<meta name="theme-color" content="#f3efe6">
+<link rel="stylesheet" href="styles.css">
+<script defer src="app.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳至主要内容</a>
+<div class="page">
+
+<header class="topbar">
+  <a class="brand" href="#today" aria-label="回到今日计划">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="10.5" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M16 2.5v7M16 22.5v7M2.5 16h7M22.5 16h7" stroke="currentColor" stroke-width="1.4"/>
+        <circle cx="16" cy="16" r="2.6" fill="currentColor"/>
+      </svg>
+    </span>
+    <span class="brand-text">
+      <strong>GRASP / 24</strong>
+      <small>单臂到双臂 · 学习计划</small>
+    </span>
+  </a>
+  <nav class="nav" aria-label="主要导航">
+    <a href="#today" class="nav-link is-active">今日</a>
+    <a href="#weeks" class="nav-link">周计划</a>
+    <a href="#route" class="nav-link">路线与验收</a>
+    <a href="#resources" class="nav-link">资料</a>
+  </nav>
+  <div class="progress-chip">
+    <div class="progress-chip-text">
+      <span>总进度</span>
+      <strong id="headerProgress">0%</strong>
+    </div>
+    <div class="progress-track" id="headerBar" role="progressbar" aria-label="总打卡进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+  </div>
+</header>
+
+<main id="main">
+
+<section id="today" class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="signal-dot" aria-hidden="true"></span> 24-WEEK MANIPULATION PLAN</p>
+      <h1>先让一只手<br><span class="accent">抓得稳</span>，<br>再让两只手<br><span class="underlined">一起动</span>。</h1>
+      <p class="lede">把“双臂协同抓取”拆成 24 周、168 天。前 12 周打通单臂视觉抓取闭环，后 12 周建立共享世界模型、交接与闭链搬运。</p>
+      <dl class="specs">
+        <div><dt>周期</dt><dd>24<small>周</small></dd></div>
+        <div><dt>每日任务</dt><dd>168<small>天</small></dd></div>
+        <div><dt>投入</dt><dd>384<small>小时</small></dd></div>
+        <div><dt>验收门</dt><dd>06<small>道</small></dd></div>
+      </dl>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="#weeks">查看每日安排 <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#route">先看验收路线</a>
+      </div>
+      <p class="hero-note">按每周 16 小时设计：工作日每天 2 小时、周六 5 小时、周日 1 小时复盘。基于你已完成的手眼标定与圆柱 6D 位姿工程重排，不是从零学机器人。</p>
+    </div>
+
+    <aside class="today-panel frame" id="todayPanel" aria-live="polite">
+      <noscript><p class="today-empty">开启 JavaScript 后可查看今日任务与打卡进度。</p></noscript>
+    </aside>
+  </div>
+</section>
+
+<div class="signal-strip" aria-hidden="true">
+  <div class="signal-inner">
+    <span>CALIBRATION</span><i></i>
+    <span>PERCEPTION</span><i></i>
+    <span>GRASP SCORING</span><i></i>
+    <span>MOTION PLANNING</span><i></i>
+    <span>DUAL-ARM CONTROL</span><i></i>
+    <span>VALIDATION</span>
+  </div>
+</div>
+
+<section id="weeks" class="section section-weeks">
+  <div class="section-head">
+    <div>
+      <p class="section-kicker">02 / WEEKLY SCHEDULE</p>
+      <h2>24 周，逐日拆开</h2>
+    </div>
+    <p class="section-intro">周一理论，周二至周五开发与实验，周六深度工作，周日只做复盘。每周都有一条“最小完成线”，忙的时候先保住它。</p>
+  </div>
+
+  <div class="plan-toolbar">
+    <div class="filter-group" id="phaseFilter" role="group" aria-label="按阶段筛选周计划"></div>
+    <div class="toolbar-right">
+      <label class="checkline">
+        <input type="checkbox" id="hideDone">
+        <span class="checkline-box" aria-hidden="true"></span>
+        <span>隐藏已完成周</span>
+      </label>
+      <button class="text-btn" id="toggleAll" type="button">展开全部</button>
+    </div>
+  </div>
+
+  <div id="weekList" class="week-list"></div>
+  <p class="empty-note" id="emptyNote" hidden>当前筛选下没有周计划。切换阶段，或取消“隐藏已完成周”。</p>
+</section>
+
+<section id="route" class="section section-route">
+  <div class="section-head">
+    <div>
+      <p class="section-kicker">03 / ROUTE &amp; GATES</p>
+      <h2>六道门，逐个过</h2>
+    </div>
+    <p class="section-intro">每个阶段都有可量化的门槛和“未过怎么办”。时间表服从验收结果：G3 不通过，就不把双臂共同搬运放进这半年。</p>
+  </div>
+
+  <div class="pipeline-card frame">
+    <div class="pipeline-head">
+      <span class="micro-label">SINGLE-ARM CLOSED LOOP → DUAL-ARM COORDINATION</span>
+      <span class="pipeline-badge">每周一次闭环</span>
+    </div>
+    <ol class="pipeline">
+      <li><span class="pipe-no">01</span><strong>标定</strong><small>像素 → base</small></li>
+      <li><span class="pipe-no">02</span><strong>感知</strong><small>圆柱 6D 位姿</small></li>
+      <li><span class="pipe-no">03</span><strong>评分</strong><small>候选与碰撞</small></li>
+      <li><span class="pipe-no">04</span><strong>规划</strong><small>MoveIt / 状态机</small></li>
+      <li><span class="pipe-no">05</span><strong>执行</strong><small>真机与安全停</small></li>
+      <li><span class="pipe-no">06</span><strong>验证</strong><small>成功率与日志</small></li>
+    </ol>
+    <p class="pipeline-loop"><span>失败样本</span> 回到感知与位姿，而不是直接调运动参数 <span class="loop-mark" aria-hidden="true">↺</span></p>
+  </div>
+
+  <div class="route-top-grid">
+    <div class="coord-card frame">
+      <p class="micro-label">ONE WORLD, THREE SOURCES</p>
+      <h3>双臂共享同一个世界坐标系</h3>
+      <svg class="coord-svg" viewBox="0 0 560 286" role="img" aria-label="世界坐标系连接两台机械臂基座、相机与目标物体的坐标树示意">
+        <defs>
+          <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0L8 4L0 8z" fill="#59676c"></path>
+          </marker>
+        </defs>
+        <g stroke="currentColor" fill="none" stroke-width="1.2">
+          <rect x="208" y="22" width="144" height="42" rx="2"></rect>
+          <rect x="52" y="122" width="150" height="44" rx="2"></rect>
+          <rect x="358" y="122" width="150" height="44" rx="2"></rect>
+          <rect x="205" y="122" width="150" height="44" rx="2"></rect>
+          <rect x="205" y="224" width="150" height="42" rx="2"></rect>
+          <path d="M280 64v24M280 88H127v34M280 88h153v34M280 88v34" marker-end="url(#arrow)"></path>
+          <path d="M280 166v58" marker-end="url(#arrow)"></path>
+        </g>
+        <g class="coord-text">
+          <text x="280" y="48" text-anchor="middle">world</text>
+          <text x="127" y="149" text-anchor="middle">robot1_base</text>
+          <text x="433" y="149" text-anchor="middle">robot2_base</text>
+          <text x="280" y="149" text-anchor="middle">camera</text>
+          <text x="280" y="250" text-anchor="middle" class="coord-object">object / TCP</text>
+        </g>
+        <g class="coord-axis">
+          <path d="M28 262h22M28 262v-22" stroke="currentColor" stroke-width="1.2"></path>
+          <text x="54" y="266">world XYZ · mm</text>
+        </g>
+      </svg>
+      <p class="coord-note">共享点误差控制在 5 mm 内，再让两臂接触同一刚体。否则先退到分区作业。</p>
+    </div>
+
+    <div class="revision-card frame">
+      <p class="micro-label">WHAT CHANGED</p>
+      <h3>这版计划，优化了什么</h3>
+      <ol class="changes">
+        <li><span>01</span><p><strong>从“每周”落到“每天”</strong>：24 周拆成 168 天，固定 2h / 5h / 1h 节奏，每天都有明确产出。</p></li>
+        <li><span>02</span><p><strong>把硬件确认前置</strong>：第 1 周先补齐抓手、负载、第二台臂与力传感器信息，避免后半程返工。</p></li>
+        <li><span>03</span><p><strong>每道门都带止损方案</strong>：未达标先补救，G3 不过就不硬上共同搬运。</p></li>
+        <li><span>04</span><p><strong>资源按使用时机标注</strong>：GPD、Contact-GraspNet 只做旁路比较，不替换稳定的解析基线。</p></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase-grid" id="phaseGrid"></div>
+
+  <div class="method-head">
+    <p class="section-kicker">HOW TO RUN THE WEEK</p>
+    <h3>让计划能长期跑下去</h3>
+  </div>
+  <div class="method-grid">
+    <div class="method-card frame">
+      <div class="method-top"><span class="method-no">A</span><h4>每周固定节奏</h4></div>
+      <ul class="rhythm-list">
+        <li><span>周一</span><strong>2h</strong><em>理论 + 笔记</em></li>
+        <li><span>周二 · 周三</span><strong>4h</strong><em>功能开发</em></li>
+        <li><span>周四</span><strong>2h</strong><em>实验 / 分析</em></li>
+        <li><span>周五</span><strong>2h</strong><em>集成 / 文档</em></li>
+        <li><span>周六</span><strong>5h</strong><em>仿真或真机深度工作</em></li>
+        <li><span>周日</span><strong>1h</strong><em>复盘 + 休息</em></li>
+      </ul>
+      <p class="method-note">合计 16h/周。低于 12h/周时，按 1.5 倍周期顺延，不压缩验收实验。</p>
+    </div>
+
+    <div class="method-card frame">
+      <div class="method-top"><span class="method-no">B</span><h4>每天最后 10 分钟</h4></div>
+      <ul class="log-list">
+        <li>今天改了哪个参数、哪份配置？</li>
+        <li>指标变化了多少（成功率 / 误差 / 周期）？</li>
+        <li>最大的失败样本是什么？</li>
+        <li>明天唯一要验证的假设是什么？</li>
+      </ul>
+      <p class="method-note">没有写进日志的结果，默认视为没有发生。周报只从日志里摘。</p>
+    </div>
+
+    <div class="method-card frame">
+      <div class="method-top"><span class="method-no">C</span><h4>进度落后时</h4></div>
+      <ol class="rule-list">
+        <li>先砍拓展阅读与 GPD / Contact-GraspNet 对比，保留真机实验。</li>
+        <li>单臂没通过 G3，就不开始共同搬运；双臂阶段只保留独立任务与交接。</li>
+        <li>连续两周只写代码、没有闭环实验，立即安排一次真机或仿真复盘。</li>
+        <li>指标连续两周下降，冻结新功能，只做失败样本归因。</li>
+      </ol>
+    </div>
+
+    <div class="method-card frame warn-card">
+      <div class="method-top"><span class="method-no">D</span><h4>开工前必须确认</h4></div>
+      <ul class="confirm-list">
+        <li>抓手型号、开口、指厚与通信方式</li>
+        <li>TCP 偏移、工具重量与重心</li>
+        <li>第二台 M1013 的型号、安装位置与控制器</li>
+        <li>是否有腕部六维力传感器</li>
+        <li>相机固定方式、工作区边界与安全负责人</li>
+      </ul>
+      <p class="method-note">未知项先按保守假设执行，但第 1 周必须补齐；它们会直接改变月 4–6 的方案。</p>
+    </div>
+  </div>
+
+  <div class="metrics-card frame">
+    <div class="metrics-head">
+      <div>
+        <p class="micro-label">ACCEPTANCE METRICS</p>
+        <h3>最终用这些数字说话</h3>
+      </div>
+      <span class="metrics-tag">每项都要有原始日志</span>
+    </div>
+    <div class="table-wrap">
+      <table class="metrics-table">
+        <thead>
+          <tr><th scope="col">阶段</th><th scope="col">指标</th><th scope="col">门槛</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>单臂感知</td><td>单圆柱检测成功率 / 多物体目标选取</td><td>≥95% / ≥90%</td></tr>
+          <tr><td>单臂规划</td><td>目标可规划率</td><td>≥95%</td></tr>
+          <tr><td>单臂执行</td><td>固定工况抓取 / 随机工况抓取</td><td>≥95% / ≥90%</td></tr>
+          <tr><td>单臂执行</td><td>放置成功率</td><td>≥90%</td></tr>
+          <tr><td>定位精度</td><td>同一目标重复定位标准差</td><td>≤2–3 mm</td></tr>
+          <tr><td>双臂标定</td><td>共享工作区点位误差</td><td>≤5 mm</td></tr>
+          <tr><td>双臂交接</td><td>30 次交接成功率 / 最终 50 次</td><td>≥85% / ≥90%</td></tr>
+          <tr><td>共同搬运</td><td>真实低速搬运成功率</td><td>≥80%</td></tr>
+          <tr><td>闭链约束</td><td>仿真 TCP 相对位置 / 姿态误差</td><td>≤5 mm / ≤2°</td></tr>
+          <tr><td>安全</td><td>故障注入后安全停与可复盘</td><td>10 类全部通过</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="resources" class="section section-resources">
+  <div class="section-head">
+    <div>
+      <p class="section-kicker">04 / READING &amp; REPOS</p>
+      <h2>资料不求多，按阶段取用</h2>
+    </div>
+    <p class="section-intro">主线资源跟着周计划走；论文与开源抓取项目只做旁路比较。不要在第 1 个月就陷进学习式抓取的依赖里。</p>
+  </div>
+
+  <div class="plan-toolbar">
+    <div class="filter-group" id="resourceFilter" role="group" aria-label="按资料类型筛选"></div>
+    <div class="toolbar-right">
+      <span class="resource-count" id="resourceCount"></span>
+    </div>
+  </div>
+
+  <div class="resource-grid" id="resourceGrid"></div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-mark" aria-hidden="true">⌖</span>
+      <div>
+        <strong>GRASP / 24</strong>
+        <p>从单臂闭环到双臂协同的半年计划。</p>
+      </div>
+    </div>
+    <p class="footer-note">本计划基于既往任务记录重排，具体参数与安全要求以实验室设备、导师意见和现场风险评估为准。每次上电前完成安全检查。</p>
+    <div class="footer-actions">
+      <span class="local-note">打卡进度只保存在当前浏览器</span>
+      <button class="text-btn light" id="resetProgress" type="button">重置进度</button>
+      <a class="text-btn light" href="#today">回到顶部 ↑</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
