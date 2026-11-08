@@ -8,7 +8,8 @@
   --card: #fbf8f1;
   --ink: #17252b;
   --ink-soft: #4a5a60;
-  --muted: #6b7069;
+  /* 原 #6b7069 对 --paper 仅 4.41:1，8–11.5px 小字未达 WCAG AA；改为 #5a6059（5.63:1 / card 6.09:1） */
+  --muted: #5a6059;
   --line: #d7cfc0;
   --line-strong: #b9ae9c;
   --orange: #bf4618;
@@ -22,7 +23,9 @@
   --green: #36613a;
   --wrap: 1240px;
   --serif: "Noto Serif SC", "Source Han Serif SC", "Source Han Serif CN", "Songti SC", "STSong", "STZhongsong", "SimSun", Georgia, serif;
-  --sans: "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+  --sans: "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN", "PingFang SC",
+          "Microsoft YaHei", "Hiragino Sans GB", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Arial, system-ui, sans-serif;
   --mono: "JetBrains Mono", "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
 
@@ -1053,8 +1056,9 @@ svg { display: block; }
 .footer-brand strong { display: block; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; }
 .footer-brand p { font-size: 10.5px; color: #9d988d; margin-top: 1px; }
 .footer-note { max-width: 520px; font-size: 10.5px; line-height: 1.7; color: #9d988d; }
+.footer-note a { color: inherit; text-underline-offset: 3px; }
 .footer-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.local-note { font-family: var(--mono); font-size: 8.5px; color: #7f8278; letter-spacing: .02em; }
+.local-note { font-family: var(--mono); font-size: 8.5px; color: #b0aba0; letter-spacing: .02em; }
 
 /* ---------- responsive ---------- */
 
